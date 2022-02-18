@@ -1,15 +1,15 @@
-import React, {} from 'react'
-import Button from '@mui/material/Button';
-import log from "../images/log.png"
-import MenuIcon from '@mui/icons-material/Menu';
-import './contact.css'
-import ClickAwayListener from '@mui/material/ClickAwayListener';
-import Grow from '@mui/material/Grow';
-import Paper from '@mui/material/Paper';
-import Popper from '@mui/material/Popper';
-import MenuItem from '@mui/material/MenuItem';
-import MenuList from '@mui/material/MenuList';
-import Stack from '@mui/material/Stack';
+import React from "react";
+import Button from "@mui/material/Button";
+import log from "../images/log.png";
+import MenuIcon from "@mui/icons-material/Menu";
+import "./contact.css";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
+import Grow from "@mui/material/Grow";
+import Paper from "@mui/material/Paper";
+import Popper from "@mui/material/Popper";
+import MenuItem from "@mui/material/MenuItem";
+import MenuList from "@mui/material/MenuList";
+import Stack from "@mui/material/Stack";
 export default function Navbar() {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
@@ -26,10 +26,10 @@ export default function Navbar() {
   };
 
   function handleListKeyDown(event) {
-    if (event.key === 'Tab') {
+    if (event.key === "Tab") {
       event.preventDefault();
       setOpen(false);
-    } else if (event.key === 'Escape') {
+    } else if (event.key === "Escape") {
       setOpen(false);
     }
   }
@@ -45,85 +45,81 @@ export default function Navbar() {
   }, [open]);
 
   return (
-      <>
-    <div className='navbar'>
-     
-    <div> 
-    <img src={log} alt="" />
-    </div>
-    <div className='options'>
-    
-    <p>About us</p>
-    <p>Solution</p>
-    <p>Global Network</p>
-    
-    </div>
-  
-    <div className='option'>
-    <div>
-     <Button variant="outlined">Contact us</Button>
-    </div>
-  
-   <div className='image'>
-   
-   </div>
-   <div className='image2'>
-   </div>
-    </div>
-     
+    <>
+      <div className="navbar">
+        <div>
+          <img src={log} alt="" />
+        </div>
+        <div className="options">
+          <p>About us</p>
+          <p>Solution</p>
+          <p>Global Network</p>
+        </div>
 
-        <div className='icon'>
+        <div className="option">
+          <div>
+            <Button variant="outlined">Contact us</Button>
+          </div>
+
+          <div className="image"></div>
+          <div className="image2"></div>
+        </div>
+
+        <div className="icon">
           <Stack direction="row" spacing={2}>
-    
-      <div>
-        <Button
-          ref={anchorRef}
-          id="composition-button"
-          aria-controls={open ? 'composition-menu' : undefined}
-          aria-expanded={open ? 'true' : undefined}
-          aria-haspopup="true"
-          onClick={handleToggle}
-        >
-            <MenuIcon ></MenuIcon>
-        </Button>
-        <Popper
-          open={open}
-          anchorEl={anchorRef.current}
-          role={undefined}
-          placement="bottom-start"
-          transition
-          disablePortal
-        >
-          {({ TransitionProps, placement }) => (
-            <Grow
-              {...TransitionProps}
-              style={{
-                transformOrigin:
-                  placement === 'bottom-start' ? 'left top' : 'left bottom',
-              }}
-            >
-              <Paper>
-                <ClickAwayListener onClickAway={handleClose}>
-                  <MenuList
-                    autoFocusItem={open}
-                    id="composition-menu"
-                    aria-labelledby="composition-button"
-                    onKeyDown={handleListKeyDown}
+            <div>
+              <Button
+                ref={anchorRef}
+                id="composition-button"
+                aria-controls={open ? "composition-menu" : undefined}
+                aria-expanded={open ? "true" : undefined}
+                aria-haspopup="true"
+                onClick={handleToggle}
+              >
+                <MenuIcon></MenuIcon>
+              </Button>
+              <Popper
+                open={open}
+                anchorEl={anchorRef.current}
+                role={undefined}
+                placement="bottom-start"
+                transition
+                disablePortal
+              >
+                {({ TransitionProps, placement }) => (
+                  <Grow
+                    {...TransitionProps}
+                    style={{
+                      transformOrigin:
+                        placement === "bottom-start"
+                          ? "left top"
+                          : "left bottom",
+                    }}
                   >
-                    <MenuItem onClick={handleClose}>About us</MenuItem>
-                    <MenuItem onClick={handleClose}>Solutions</MenuItem>
-                    <MenuItem onClick={handleClose}>Global Network</MenuItem>
-                     <MenuItem onClick={handleClose}>Contact us</MenuItem>
-                  </MenuList>
-                </ClickAwayListener>
-              </Paper>
-            </Grow>
-          )}
-        </Popper>
+                    <Paper>
+                      <ClickAwayListener onClickAway={handleClose}>
+                        <MenuList
+                          autoFocusItem={open}
+                          id="composition-menu"
+                          aria-labelledby="composition-button"
+                          onKeyDown={handleListKeyDown}
+                        >
+                          <MenuItem onClick={handleClose}>About us</MenuItem>
+                          <MenuItem onClick={handleClose}>Solutions</MenuItem>
+                          <MenuItem onClick={handleClose}>
+                            Global Network
+                          </MenuItem>
+                          <MenuItem onClick={handleClose}>Contact us</MenuItem>
+                        </MenuList>
+                      </ClickAwayListener>
+                    </Paper>
+                  </Grow>
+                )}
+              </Popper>
+            </div>
+          </Stack>
+        </div>
       </div>
-    </Stack>
-    </div>
-    </div>
     </>
-  )
+  );
 }

@@ -3,25 +3,55 @@ import './contact.css'
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import grp from "../images/Grp.png"
+import Button from '@mui/material/Button';
+import Menu from "@mui/material/Menu";
+
+
+import india from "../images/india.png";
+import down from "../images/dropdown.png";
+import indias from "../images/indias.png";
+import turkey from "../images/turkey.png";
+import usa from "../images/usa.png";
+import pakistan from "../images/pakistan.png";
+import InputAdornment from '@mui/material/InputAdornment';
+import MenuItem from '@mui/material/MenuItem';
 export default function Contact() {
   const [errorNumber, seterrorNumber] = useState(false)
   const [errorMail, seterrorMail] = useState(false)
   const [errorName, seterrorName] = useState(false)
-  const [value, setValue]= useState("");
-  const [mail,setMail] = useState("");
+  const [value, setValue] = useState("");
+  const [mail, setMail] = useState("");
   const [Name, setName] = useState("");
+
   const handleChangeMail = (e) => {
     setMail(e.target.value);
     var out = e.target.value;
     var num = out.length;
-  if (num[out.length-1]==='.') {
+    if (num[out.length - 1] === '.') {
       seterrorMail(true);
-  } else {
+    } else {
       seterrorMail(false);
+    }
   }
-}
 
-
+  const area = [
+    {
+      flag: indias,
+      label: "India"
+    },
+    {
+      flag: turkey,
+      label: "Turkey"
+    },
+    {
+      flag: usa,
+      label: "USA"
+    },
+    {
+      flag: pakistan,
+      label: "Pakistan"
+    }
+  ]
   const handleChange = (e) => {
     setValue(e.target.value)
     if (/^\d+$/.test(e.target.value)) {
@@ -30,11 +60,14 @@ export default function Contact() {
       seterrorNumber(true);
     }
   };
+  const [country, setCountry] = useState("India");
+  const handleChangeCountry = (event) => {
+    setCountry(event.target.value);
+  };
 
-
-   const handleChangeName = (e) => {
-     var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
-     setName(e.target.value)
+  const handleChangeName = (e) => {
+    var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+    setName(e.target.value)
     if (format.test(e.target.value)) {
       seterrorName(true);
     } else {
@@ -72,6 +105,12 @@ export default function Contact() {
                     maxRows={4}
                     value={value}
                     onChange={handleChange}
+                    InputProps={{
+                      startAdornment: <InputAdornment position="start">
+                        <img className="india" src={india} alt="some" />
+                        <img className="down" src={down} alt="down" /> <span className="arrow"> |</span>
+                      </InputAdornment>,
+                    }}
                   />
                 ) : (
                   <TextField
@@ -82,37 +121,59 @@ export default function Contact() {
                     value={value}
                     onChange={handleChange}
                     helperText="Alphabets not allowed"
+                    InputProps={{
+                      startAdornment: <InputAdornment position="start">
+                        <img className="india" src={india} alt="some" />
+                        <img className="down" src={down} alt="down" />
+                      </InputAdornment>,
+                    }}
                   />
                 )
               }
 
               <TextField
-                id="outlined-textarea"
+                id="outlined-select-currency"
+                select
                 label="Select Country"
-                placeholder="Placeholder"
-                multiline
-              />
+                sx={{ m: 1, width: '94%' }}
+
+                value={country}
+                onChange={handleChangeCountry}
+                helperText="Please select your currency"
+              >
+                {area.map((option) => (
+
+                  <MenuItem key={option.label} value={option.label} className="totl" style={{ width: "10px", height: "40px" }}>
+                    <img src={option.flag} alt="flag" className='imgs' />
+                    <p className="align" >{option.label}</p>
+
+
+                  </MenuItem>
+
+                ))}
+              </TextField>
+
               {
                 errorName === false ? (
-              <TextField
-                id="outlined-textarea"
-                label="Enter Name"
-                placeholder="Enter Name"
-                 value={Name}
-                onChange={handleChangeName}
-                multiline
-              />
+                  <TextField
+                    id="outlined-textarea"
+                    label="Enter Name"
+                    placeholder="Enter Name"
+                    value={Name}
+                    onChange={handleChangeName}
+                    multiline
+                  />
                 ) : (
-                 <TextField
-                id="outlined-textarea"
-                label="Enter Name"
-                placeholder="Enter Name"
-                multiline
-                error
-                value={Name}
-                onChange={handleChangeName}
-                helperText="Special Characters not allowed"
-              />
+                  <TextField
+                    id="outlined-textarea"
+                    label="Enter Name"
+                    placeholder="Enter Name"
+                    multiline
+                    error
+                    value={Name}
+                    onChange={handleChangeName}
+                    helperText="Special Characters not allowed"
+                  />
                 )
               }
               {
@@ -142,13 +203,16 @@ export default function Contact() {
                 label="Message"
                 multiline
                 rows={4}
-              />
+              /> <br />
+              <Button variant="contained" id="Submit_btn" >Submit</Button>
             </div>
             <div>
             </div>
           </Box>
         </div>
       </div>
+      
+
     </>
   )
 }
