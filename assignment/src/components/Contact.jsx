@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import grp from "../images/Grp.png"
 import Button from '@mui/material/Button';
-import Menu from "@mui/material/Menu";
+//import Menu from "@mui/material/Menu";
 
 
 import india from "../images/india.png";
@@ -66,7 +66,7 @@ export default function Contact() {
   };
 
   const handleChangeName = (e) => {
-    var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+    var format = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/;
     setName(e.target.value)
     if (format.test(e.target.value)) {
       seterrorName(true);

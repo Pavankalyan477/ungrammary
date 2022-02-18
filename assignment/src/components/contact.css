@@ -114,7 +114,7 @@ margin-right: 200px;
   float: left;
   margin-left: 15%;
 }
-@media (min-width: 375px) and (max-width: 882px) {
+@media (min-width: 270px) and (max-width: 882px) {
   .option {
       display: none;
   }.options
